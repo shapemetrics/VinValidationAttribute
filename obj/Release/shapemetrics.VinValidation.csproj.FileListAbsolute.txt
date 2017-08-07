@@ -1,0 +1,16 @@
+C:\Users\user\Source\Repos\VinValidationAttribute\bin\Release\shapemetrics.VinValidation.dll
+C:\Users\user\Source\Repos\VinValidationAttribute\bin\Release\shapemetrics.VinValidation.pdb
+C:\Users\user\Source\Repos\VinValidationAttribute\bin\Release\System.Web.Mvc.dll
+C:\Users\user\Source\Repos\VinValidationAttribute\bin\Release\System.Web.Razor.dll
+C:\Users\user\Source\Repos\VinValidationAttribute\bin\Release\System.Web.WebPages.Razor.dll
+C:\Users\user\Source\Repos\VinValidationAttribute\bin\Release\System.Web.WebPages.dll
+C:\Users\user\Source\Repos\VinValidationAttribute\bin\Release\Microsoft.Web.Infrastructure.dll
+C:\Users\user\Source\Repos\VinValidationAttribute\bin\Release\System.Web.WebPages.Deployment.dll
+C:\Users\user\Source\Repos\VinValidationAttribute\bin\Release\System.Web.Mvc.xml
+C:\Users\user\Source\Repos\VinValidationAttribute\bin\Release\System.Web.Razor.xml
+C:\Users\user\Source\Repos\VinValidationAttribute\bin\Release\System.Web.WebPages.Razor.xml
+C:\Users\user\Source\Repos\VinValidationAttribute\bin\Release\System.Web.WebPages.xml
+C:\Users\user\Source\Repos\VinValidationAttribute\bin\Release\Microsoft.Web.Infrastructure.xml
+C:\Users\user\Source\Repos\VinValidationAttribute\bin\Release\System.Web.WebPages.Deployment.xml
+C:\Users\user\Source\Repos\VinValidationAttribute\obj\Release\shapemetrics.VinValidation.dll
+C:\Users\user\Source\Repos\VinValidationAttribute\obj\Release\shapemetrics.VinValidation.pdb

@@ -1,0 +1,17 @@
+C:\Users\user\Dropbox\shapemetrics.VinValidation\bin\Debug\shapemetrics.VinValidation.dll
+C:\Users\user\Dropbox\shapemetrics.VinValidation\bin\Debug\shapemetrics.VinValidation.pdb
+C:\Users\user\Dropbox\shapemetrics.VinValidation\bin\Debug\System.Web.Mvc.dll
+C:\Users\user\Dropbox\shapemetrics.VinValidation\bin\Debug\System.Web.Razor.dll
+C:\Users\user\Dropbox\shapemetrics.VinValidation\bin\Debug\System.Web.WebPages.Razor.dll
+C:\Users\user\Dropbox\shapemetrics.VinValidation\bin\Debug\System.Web.WebPages.dll
+C:\Users\user\Dropbox\shapemetrics.VinValidation\bin\Debug\Microsoft.Web.Infrastructure.dll
+C:\Users\user\Dropbox\shapemetrics.VinValidation\bin\Debug\System.Web.WebPages.Deployment.dll
+C:\Users\user\Dropbox\shapemetrics.VinValidation\bin\Debug\System.Web.Mvc.xml
+C:\Users\user\Dropbox\shapemetrics.VinValidation\bin\Debug\System.Web.Razor.xml
+C:\Users\user\Dropbox\shapemetrics.VinValidation\bin\Debug\System.Web.WebPages.Razor.xml
+C:\Users\user\Dropbox\shapemetrics.VinValidation\bin\Debug\System.Web.WebPages.xml
+C:\Users\user\Dropbox\shapemetrics.VinValidation\bin\Debug\Microsoft.Web.Infrastructure.xml
+C:\Users\user\Dropbox\shapemetrics.VinValidation\bin\Debug\System.Web.WebPages.Deployment.xml
+C:\Users\user\Dropbox\shapemetrics.VinValidation\obj\Debug\shapemetrics.VinValidation.csprojResolveAssemblyReference.cache
+C:\Users\user\Dropbox\shapemetrics.VinValidation\obj\Debug\shapemetrics.VinValidation.dll
+C:\Users\user\Dropbox\shapemetrics.VinValidation\obj\Debug\shapemetrics.VinValidation.pdb
