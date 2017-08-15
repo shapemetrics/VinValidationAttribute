@@ -15,7 +15,7 @@ namespace shapemetrics.VinValidation
 
 
     [AttributeUsage(AttributeTargets.Property, AllowMultiple = false, Inherited = true)]
-    public sealed class ValidBirthDate : ValidationAttribute
+    public sealed class VinValidation : ValidationAttribute
     {
         protected override ValidationResult IsValid(object value, ValidationContext validationContext)
         {
@@ -120,7 +120,7 @@ namespace shapemetrics.VinValidation
                 return ValidationResult.Success;
             }
 
-            return new ValidationResult(String.Format("Unknown error for {0}", validationContext.DisplayName)); ;
+            return new ValidationResult(String.Format("{0} contains an invalid Check digit {1}", validationContext.DisplayName, check)); ;
         }
     }
 
