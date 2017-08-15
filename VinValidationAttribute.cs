@@ -12,7 +12,9 @@ using System.Collections;
 namespace shapemetrics.VinValidation
 {
 
-
+    /// <summary>
+    /// Usage is [VinValidation] tag on a property/field of a model
+    /// </summary>
 
     [AttributeUsage(AttributeTargets.Property, AllowMultiple = false, Inherited = true)]
     public sealed class VinValidation : ValidationAttribute
@@ -23,7 +25,7 @@ namespace shapemetrics.VinValidation
             string p_strVin = "";
             if (value != null)
             {
-                p_strVin = (string)value;
+                p_strVin = ((string)value).ToUpper().Trim();
             }
 
 
@@ -37,31 +39,29 @@ namespace shapemetrics.VinValidation
                 return new ValidationResult(String.Format("Invalid length for {0}", validationContext.DisplayName));
             }
 
-            //Capitalize all values in VIN
-            p_strVin = p_strVin.ToUpper().Trim();
+
+            //Default CheckDigitValue (in numeric format)
             int intCheckValue = 0;
             //Get the Check digit from VIN
             char check = p_strVin[8];
             //Get the Year from the VIN
             char year = p_strVin[9];
             //Ensure the check digit is 0-9 or X
-            if (!char.IsDigit(check) && check != 'X')
+            if (!(char.IsDigit(check) && check == 'X'))
             {
                 return new ValidationResult(String.Format("Check Digit is invalid {0}", validationContext.DisplayName));
             }
+            //Get the numeric value of the check digit, Has to be numeric here 
+            else if (check != 'X')
+            {
+                char[] d = new char[] { check };
+                intCheckValue = int.Parse(Encoding.ASCII.GetString(Encoding.ASCII.GetBytes(d)));
+            }
             else
             {
-                //Get the numeric value of the check digit
-                if (check != 'X')
-                {
-                    char[] d = new char[] { check };
-                    intCheckValue = int.Parse(Encoding.ASCII.GetString(Encoding.ASCII.GetBytes(d)));
-                }
-                else
-                {
-                    intCheckValue = 10;
-                }
+                intCheckValue = 10;
             }
+
             //Hash table of the character replacement values
             Hashtable replaceValues = new Hashtable();
             replaceValues.Add('A', 1);

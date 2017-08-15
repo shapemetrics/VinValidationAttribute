@@ -14,3 +14,4 @@ C:\Users\user\Source\Repos\VinValidationAttribute\bin\Release\Microsoft.Web.Infr
 C:\Users\user\Source\Repos\VinValidationAttribute\bin\Release\System.Web.WebPages.Deployment.xml
 C:\Users\user\Source\Repos\VinValidationAttribute\obj\Release\shapemetrics.VinValidation.dll
 C:\Users\user\Source\Repos\VinValidationAttribute\obj\Release\shapemetrics.VinValidation.pdb
+C:\Users\user\Source\Repos\VinValidationAttribute\obj\Release\shapemetrics.VinValidation.csprojResolveAssemblyReference.cache

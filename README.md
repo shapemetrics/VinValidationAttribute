@@ -10,7 +10,7 @@ namespace shapemetrics.models
 {
 	public class VehicleViewModel
 	{
-		
+		[VinValidation]
 		public string VIN{get;set;}
 
 	}
