@@ -98,11 +98,17 @@ namespace shapemetrics.VinValidation
             replaceValues.Add('9', 9);
             replaceValues.Add('0', 0);
 
-            //Make sure it is a Valid Year 
-            if (!replaceValues.Contains(year) && year != '0')
+
+            //Make sure it is a Valid Year - Created the next 4 lines to correct U, Z & 0 from being in the list
+            Hashtable yearValues = (Hashtable)replaceValues.Clone(); //Get a shallow copy of values
+            yearValues.Remove('0');
+            yearValues.Remove('Z');
+            yearValues.Remove('U');
+            if (!yearValues.Contains(year))
             {
-                return new ValidationResult(String.Format("Year is invalid {0}", validationContext.DisplayName));
+                return new ValidationResult(String.Format("Year is invalid {0}", validationContext.DisplayName)); 
             }
+
 
             //Make sure characters valid values. 
             for (int i = 0; i < p_strVin.Length; i++)
