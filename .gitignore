@@ -3,3 +3,13 @@
 ################################################################################
 
 /obj/Release
+bin\Release
+obj\Debug\
+obj\Release\
+.vs
+.vs\shapeetrics.VinValidation\v15
+bin\Release\
+bin\Release\shapemetrics.VinValidation.dll
+bin\Release\shapemetrics.VinValidation.pdb
+obj\Release\shapemetrics.VinValidation.dll
+obj\Release\shapemetrics.VinValidation.pdb

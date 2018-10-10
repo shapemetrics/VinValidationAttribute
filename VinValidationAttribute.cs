@@ -19,51 +19,13 @@ namespace shapemetrics.VinValidation
     [AttributeUsage(AttributeTargets.Property, AllowMultiple = false, Inherited = true)]
     public sealed class VinValidation : ValidationAttribute
     {
-        protected override ValidationResult IsValid(object value, ValidationContext validationContext)
+        private readonly int[] intWeights = { 8, 7, 6, 5, 4, 3, 2, 10, 0, 9, 8, 7, 6, 5, 4, 3, 2 };
+        private readonly Dictionary<char, int> replaceValues;
+        private readonly Dictionary<char, int> yearValues;
+
+        public VinValidation()
         {
-
-            string p_strVin = "";
-            if (value != null)
-            {
-                p_strVin = ((string)value).ToUpper().Trim();
-            }
-
-
-            int intValue = 0;
-            //Multiplier weights for each position.
-            int[] intWeights = { 8, 7, 6, 5, 4, 3, 2, 10, 0, 9, 8, 7, 6, 5, 4, 3, 2 };
-
-
-            if (string.IsNullOrEmpty(p_strVin) || p_strVin.Length != 17)
-            {
-                return new ValidationResult(String.Format("Invalid length for {0}", validationContext.DisplayName));
-            }
-
-
-            //Default CheckDigitValue (in numeric format)
-            int intCheckValue = 0;
-            //Get the Check digit from VIN
-            char check = p_strVin[8];
-            //Get the Year from the VIN
-            char year = p_strVin[9];
-            //Ensure the check digit is 0-9 or X
-            if (!(char.IsDigit(check) && check == 'X'))
-            {
-                return new ValidationResult(String.Format("Check Digit is invalid {0}", validationContext.DisplayName));
-            }
-            //Get the numeric value of the check digit, Has to be numeric here 
-            else if (check != 'X')
-            {
-                char[] d = new char[] { check };
-                intCheckValue = int.Parse(Encoding.ASCII.GetString(Encoding.ASCII.GetBytes(d)));
-            }
-            else
-            {
-                intCheckValue = 10;
-            }
-
-            //Hash table of the character replacement values
-            Hashtable replaceValues = new Hashtable();
+            replaceValues = new Dictionary<char, int>();
             replaceValues.Add('A', 1);
             replaceValues.Add('B', 2);
             replaceValues.Add('C', 3);
@@ -98,26 +60,57 @@ namespace shapemetrics.VinValidation
             replaceValues.Add('9', 9);
             replaceValues.Add('0', 0);
 
-
-            //Make sure it is a Valid Year - Created the next 4 lines to correct U, Z & 0 from being in the list
-            Hashtable yearValues = (Hashtable)replaceValues.Clone(); //Get a shallow copy of values
+            yearValues = new Dictionary<char, int>(replaceValues);
             yearValues.Remove('0');
             yearValues.Remove('Z');
             yearValues.Remove('U');
-            if (!yearValues.Contains(year))
+
+        }
+
+        protected override ValidationResult IsValid(object value, ValidationContext validationContext)
+        {
+
+            string p_strVin = "";
+            int intValue = 0;
+            if (string.IsNullOrEmpty(p_strVin) || p_strVin.Length != 17)
             {
-                return new ValidationResult(String.Format("Year is invalid {0}", validationContext.DisplayName)); 
+                return new ValidationResult(String.Format("Invalid length for {0}", validationContext.DisplayName));
+            }
+            else
+            {
+                p_strVin = ((string)value).ToUpper().Trim();
+            }
+
+            //Default CheckDigitValue (in numeric format)
+            int intCheckValue = 0;
+            //Get the Check digit from VIN
+            char check = p_strVin[8];
+            //Get the Year from the VIN
+            char year = p_strVin[9];
+            //Ensure the check digit is 0-9 or X
+            if (!(char.IsDigit(check) && check == 'X'))
+            {
+                return new ValidationResult(String.Format("Check Digit is invalid {0}", validationContext.DisplayName));
+            }
+            else
+            {
+                intCheckValue = (check != 'X' ? ((int)char.GetNumericValue(check)) : 10);
+            }
+
+            if (!yearValues.ContainsKey(year))
+            {
+                return new ValidationResult(String.Format("Year is invalid {0}", validationContext.DisplayName));
             }
 
 
             //Make sure characters valid values. 
             for (int i = 0; i < p_strVin.Length; i++)
             {
-                if (!replaceValues.Contains(p_strVin[i]))
+                if (!replaceValues.ContainsKey(p_strVin[i]))
                 {
                     return new ValidationResult(String.Format("Invalid Character for {0} at position {1}", validationContext.DisplayName, i + 1)); ;
                 }
-                intValue += (intWeights[i] * ((int)replaceValues[p_strVin[i]]));
+                intValue += (intWeights[i] * replaceValues[p_strVin[i]]);
             }
 
 
