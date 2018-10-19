@@ -74,13 +74,12 @@ namespace shapemetrics.VinValidation
             int intValue = 0;
             if (string.IsNullOrEmpty(p_strVin) || p_strVin.Length != 17)
             {
-                return new ValidationResult(String.Format("Invalid length for {0}", validationContext.DisplayName));
+                return new ValidationResult(String.Format("{0} has an invalid length", validationContext.DisplayName));
             }
             else
             {
                 p_strVin = ((string)value).ToUpper().Trim();
             }
-
             //Default CheckDigitValue (in numeric format)
             int intCheckValue = 0;
             //Get the Check digit from VIN
@@ -90,7 +89,7 @@ namespace shapemetrics.VinValidation
             //Ensure the check digit is 0-9 or X
             if (!(char.IsDigit(check) && check == 'X'))
             {
-                return new ValidationResult(String.Format("Check Digit is invalid {0}", validationContext.DisplayName));
+                return new ValidationResult(String.Format("{0} contains an invalid check digit {1}", validationContext.DisplayName, check));
             }
             else
             {
@@ -99,18 +98,19 @@ namespace shapemetrics.VinValidation
 
             if (!yearValues.ContainsKey(year))
             {
-                return new ValidationResult(String.Format("Year is invalid {0}", validationContext.DisplayName));
+                return new ValidationResult(String.Format("{0} contains an invalid value for year: {1}", validationContext.DisplayName, year));
             }
 
-
+            int pos = 0;
             //Make sure characters valid values. 
-            for (int i = 0; i < p_strVin.Length; i++)
+            foreach (var c in p_strVin)
             {
-                if (!replaceValues.ContainsKey(p_strVin[i]))
+                if (!replaceValues.ContainsKey(c))
                 {
-                    return new ValidationResult(String.Format("Invalid Character for {0} at position {1}", validationContext.DisplayName, i + 1)); ;
+                    return new ValidationResult(String.Format("{0} contains an invalid value: {2} at position {1}", validationContext.DisplayName, pos + 1, c)); ;
                 }
-                intValue += (intWeights[i] * replaceValues[p_strVin[i]]);
+                intValue += (intWeights[pos] * replaceValues[c]);
+                pos++;
             }
 
 
@@ -119,7 +119,7 @@ namespace shapemetrics.VinValidation
                 return ValidationResult.Success;
             }
 
-            return new ValidationResult(String.Format("{0} contains an invalid Check digit {1}", validationContext.DisplayName, check)); ;
+            return new ValidationResult(String.Format("{0} contains an invalid check digit: {1}", validationContext.DisplayName, check)); ;
         }
     }
 
