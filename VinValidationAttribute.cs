@@ -80,7 +80,7 @@ namespace shapemetrics.VinValidation
             {
                 p_strVin = ((string)value).ToUpper().Trim();
             }
-            //Default CheckDigitValue (in numeric format)
+            //Default CheckDigitValue (in numeric format) 
             int intCheckValue = 0;
             //Get the Check digit from VIN
             char check = p_strVin[8];
