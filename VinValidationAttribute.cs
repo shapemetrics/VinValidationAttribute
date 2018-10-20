@@ -103,15 +103,15 @@ namespace shapemetrics.VinValidation
 
             int pos = 0;
             //Make sure characters valid values. 
-            foreach (var c in p_strVin)
+            if (p_strVin.ToCharArray().TakeWhile(x => !replaceValues.Keys.Contains(x)).Count() > 0)
             {
-                if (!replaceValues.ContainsKey(c))
-                {
-                    return new ValidationResult(String.Format("{0} contains an invalid value: {2} at position {1}", validationContext.DisplayName, pos + 1, c)); ;
-                }
-                intValue += (intWeights[pos] * replaceValues[c]);
-                pos++;
+                return new ValidationResult(String.Format("{0} contains an invalid character", validationContext.DisplayName));
             }
+
+            p_strVin.ToCharArray().ToList().ForEach(x =>
+            {
+                intValue += (intWeights[pos] * replaceValues[x]);
+            });
 
 
             if ((intValue % 11) == intCheckValue)
