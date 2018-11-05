@@ -25,40 +25,42 @@ namespace shapemetrics.VinValidation
 
         public VinValidation()
         {
-            replaceValues = new Dictionary<char, int>();
-            replaceValues.Add('A', 1);
-            replaceValues.Add('B', 2);
-            replaceValues.Add('C', 3);
-            replaceValues.Add('D', 4);
-            replaceValues.Add('E', 5);
-            replaceValues.Add('F', 6);
-            replaceValues.Add('G', 7);
-            replaceValues.Add('H', 8);
-            replaceValues.Add('J', 1);
-            replaceValues.Add('K', 2);
-            replaceValues.Add('L', 3);
-            replaceValues.Add('M', 4);
-            replaceValues.Add('N', 5);
-            replaceValues.Add('P', 7);
-            replaceValues.Add('R', 9);
-            replaceValues.Add('S', 2);
-            replaceValues.Add('T', 3);
-            replaceValues.Add('U', 4);
-            replaceValues.Add('V', 5);
-            replaceValues.Add('W', 6);
-            replaceValues.Add('X', 7);
-            replaceValues.Add('Y', 8);
-            replaceValues.Add('Z', 9);
-            replaceValues.Add('1', 1);
-            replaceValues.Add('2', 2);
-            replaceValues.Add('3', 3);
-            replaceValues.Add('4', 4);
-            replaceValues.Add('5', 5);
-            replaceValues.Add('6', 6);
-            replaceValues.Add('7', 7);
-            replaceValues.Add('8', 8);
-            replaceValues.Add('9', 9);
-            replaceValues.Add('0', 0);
+            replaceValues = new Dictionary<char, int>()
+            {
+                    {'A', 1},
+                    {'B', 2},
+                    {'C', 3},
+                    {'D', 4},
+                    {'E', 5},
+                    {'F', 6},
+                    {'G', 7},
+                    {'H', 8},
+                    {'J', 1},
+                    {'K', 2},
+                    {'L', 3},
+                    {'M', 4},
+                    {'N', 5},
+                    {'P', 7},
+                    {'R', 9},
+                    {'S', 2},
+                    {'T', 3},
+                    {'U', 4},
+                    {'V', 5},
+                    {'W', 6},
+                    {'X', 7},
+                    {'Y', 8},
+                    {'Z', 9},
+                    {'1', 1},
+                    {'2', 2},
+                    {'3', 3},
+                    {'4', 4},
+                    {'5', 5},
+                    {'6', 6},
+                    {'7', 7},
+                    {'8', 8},
+                    {'9', 9},
+                    {'0', 0}
+            };
 
             yearValues = new Dictionary<char, int>(replaceValues);
             yearValues.Remove('0');
