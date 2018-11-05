@@ -98,7 +98,6 @@ namespace shapemetrics.VinValidation
                 return new ValidationResult(String.Format("{0} contains an invalid value for year: {1}", validationContext.DisplayName, year));
             }
 
-            int pos = 0;
             //Make sure characters valid values. 
             if (p_strVin.ToCharArray().Where(x => !replaceValues.Keys.Contains(x)).Count() > 0)
             {
