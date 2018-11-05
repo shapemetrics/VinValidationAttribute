@@ -100,7 +100,7 @@ namespace shapemetrics.VinValidation
 
             int pos = 0;
             //Make sure characters valid values. 
-            if (p_strVin.ToCharArray().TakeWhile(x => !replaceValues.Keys.Contains(x)).Count() > 0)
+            if (p_strVin.ToCharArray().Where(x => !replaceValues.Keys.Contains(x)).Count() > 0)
             {
                 return new ValidationResult(String.Format("{0} contains an invalid character", validationContext.DisplayName));
             }
