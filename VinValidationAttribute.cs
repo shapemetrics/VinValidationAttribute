@@ -71,7 +71,7 @@ namespace shapemetrics.VinValidation
         {
 
             string p_strVin = (value == null ? "":((string)value).ToUpper().Trim());
-            int intValue = 0;
+
             if (string.IsNullOrEmpty(p_strVin) || p_strVin.Length != 17)
             {
                 return new ValidationResult(String.Format("{0} has an invalid length", validationContext.DisplayName));
@@ -84,7 +84,7 @@ namespace shapemetrics.VinValidation
             //Get the Year from the VIN
             char year = p_strVin[9];
             //Ensure the check digit is 0-9 or X
-            if (!(char.IsDigit(check) && check == 'X'))
+            if (!(char.IsDigit(check) || check == 'X'))
             {
                 return new ValidationResult(String.Format("{0} contains an invalid check digit {1}", validationContext.DisplayName, check));
             }
@@ -105,11 +105,7 @@ namespace shapemetrics.VinValidation
                 return new ValidationResult(String.Format("{0} contains an invalid character", validationContext.DisplayName));
             }
 
-            p_strVin.ToCharArray().ToList().ForEach(x =>
-            {
-                intValue += (intWeights[pos] * replaceValues[x]);
-            });
-
+            int intValue = p_strVin.ToCharArray().ToList().Select((x, index) => new { Value = (intWeights[index] * replaceValues[x]) }).Sum(x => x.Value);
 
             if ((intValue % 11) == intCheckValue)
             {
