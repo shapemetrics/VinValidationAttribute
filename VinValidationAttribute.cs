@@ -70,16 +70,13 @@ namespace shapemetrics.VinValidation
         protected override ValidationResult IsValid(object value, ValidationContext validationContext)
         {
 
-            string p_strVin = "";
+            string p_strVin = (value == null ? "":((string)value).ToUpper().Trim());
             int intValue = 0;
             if (string.IsNullOrEmpty(p_strVin) || p_strVin.Length != 17)
             {
                 return new ValidationResult(String.Format("{0} has an invalid length", validationContext.DisplayName));
             }
-            else
-            {
-                p_strVin = ((string)value).ToUpper().Trim();
-            }
+
             //Default CheckDigitValue (in numeric format) 
             int intCheckValue = 0;
             //Get the Check digit from VIN
