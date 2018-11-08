@@ -20,7 +20,7 @@ namespace shapemetrics.models
 }
 
 ```
-##Validate the postback
+## Validate the postback
 within your controller method for postback, check to see if the model is valid.
 
 ```csharp
