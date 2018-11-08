@@ -25,7 +25,7 @@ within your controller method for postback, check to see if the model is valid.
 
 ```csharp
 if(!ModelState.IsValid){
-	return View(model)
+	return View(model);
 }
 
 
