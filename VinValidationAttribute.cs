@@ -3,11 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
 using System.ComponentModel.DataAnnotations;
-using System.Web.Mvc;
 using System.Collections;
-
+using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 
 namespace shapemetrics.VinValidation
 {
@@ -17,7 +15,7 @@ namespace shapemetrics.VinValidation
     /// </summary>
 
     [AttributeUsage(AttributeTargets.Property, AllowMultiple = false, Inherited = true)]
-    public sealed class VinValidation : ValidationAttribute
+    public sealed class VinValidation : ValidationAttribute, IClientModelValidator
     {
         private readonly int[] intWeights = { 8, 7, 6, 5, 4, 3, 2, 10, 0, 9, 8, 7, 6, 5, 4, 3, 2 };
         private readonly Dictionary<char, int> replaceValues;
@@ -69,10 +67,32 @@ namespace shapemetrics.VinValidation
 
         }
 
+        private string displayName;
+
+        public void AddValidation(ClientModelValidationContext context)
+        {
+
+            context.Attributes.TryAdd("data-val", "true");
+
+            context.Attributes.TryAdd("data-val-vinlength", $"{displayName} has an invalid length");
+
+            context.Attributes.TryAdd("data-val-vincheckdigit", $"{displayName} contains an invalid check digit value");
+
+
+            context.Attributes.TryAdd("data-val-vinyear", $"{displayName} contains an invalid value for year");
+
+            context.Attributes.TryAdd("data-val-vinchars", $"{displayName} contains an invalid value(s)");
+
+            context.Attributes.TryAdd("data-val-vinvalidation", $"{displayName} contains an invalid check digit");
+
+
+        }
+
         protected override ValidationResult IsValid(object value, ValidationContext validationContext)
         {
 
-            string p_strVin = (value == null ? "":((string)value).ToUpper().Trim());
+            displayName = validationContext.DisplayName;
+            string p_strVin = (value == null ? "" : ((string)value).ToUpper().Trim());
 
             if (string.IsNullOrEmpty(p_strVin) || p_strVin.Length != 17)
             {
@@ -88,7 +108,7 @@ namespace shapemetrics.VinValidation
             //Ensure the check digit is 0-9 or X
             if (!(char.IsDigit(check) || check == 'X'))
             {
-                return new ValidationResult(String.Format("{0} contains an invalid check digit {1}", validationContext.DisplayName, check));
+                return new ValidationResult(String.Format("{0} contains an invalid check digit value", validationContext.DisplayName, check));
             }
             else
             {

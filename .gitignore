@@ -13,3 +13,7 @@ bin\Release\shapemetrics.VinValidation.dll
 bin\Release\shapemetrics.VinValidation.pdb
 obj\Release\shapemetrics.VinValidation.dll
 obj\Release\shapemetrics.VinValidation.pdb
+*.exe
+*.pdb
+*.manifest
+*.cache
