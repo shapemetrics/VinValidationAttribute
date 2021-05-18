@@ -108,7 +108,7 @@ namespace shapemetrics.VinValidation
             //Ensure the check digit is 0-9 or X
             if (!(char.IsDigit(check) || check == 'X'))
             {
-                return new ValidationResult(String.Format("{0} contains an invalid check digit value", validationContext.DisplayName, check));
+                return new ValidationResult(String.Format("{0} contains an invalid check digit value", validationContext.DisplayName));
             }
             else
             {
